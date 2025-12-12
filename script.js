@@ -33,6 +33,7 @@ const UIController = (function () {
             cell.textContent = mark;
             cell.classList.add(mark);
             cell.disabled = true;
+            document.getElementById("ttt-grid").classList.toggle("o-active");
         } else {
             console.error(`error: cell (${i}, ${j}) not found`);
         }

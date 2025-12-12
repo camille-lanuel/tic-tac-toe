@@ -30,17 +30,17 @@ button {
     font-size: 2rem;
 }
 
-.o {
+.o, .o-active > button:hover:not(:disabled) {
     background-color: lightblue;
 }
 
-.x {
+.x, button:hover:not(:disabled) {
     background-color: lightpink;
 }
 
-button:hover:not(:disabled) {
+/* button:hover:not(:disabled) {
     background-color: darkgray;
-}
+} */
 
 button:disabled {
     cursor: not-allowed;
