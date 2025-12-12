@@ -1,0 +1,47 @@
+body {
+    color: #333;
+    font-family: monospace;
+    font-size: 1.1rem;
+    margin: auto;
+    max-width: 30rem;
+}
+
+::selection {
+    background-color: lightgray;
+}
+
+#ttt-grid {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: 5rem 5rem 5rem;
+    grid-template-rows: 5rem 5rem 5rem;
+    justify-content: center;
+}
+
+.endgame {
+    font-weight: bold;
+}
+
+button {
+    background-color: lightgray;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font-size: 2rem;
+}
+
+.o {
+    background-color: lightblue;
+}
+
+.x {
+    background-color: lightpink;
+}
+
+button:hover:not(:disabled) {
+    background-color: darkgray;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
