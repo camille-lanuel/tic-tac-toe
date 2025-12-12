@@ -18,7 +18,7 @@ const gameboard = (function (n) {
     return { getBoard, getCell, getSize, updateCell, isCellEmpty };
 })(gridSize);
 
-const displayController = (function () {
+const UIController = (function () {
     const cells = document.querySelectorAll(".cell");
     
     cells.forEach(btn => {
@@ -71,15 +71,15 @@ const displayController = (function () {
     return { markCell, displayPlayers, displayTurn: displayPlayer, displayEndgame };
 })();
 
-const createGame = (function (px, po, gameboard, displayController) {
-    displayController.displayPlayers(px, po);
+const createGame = (function (px, po, gameboard, UIController) {
+    UIController.displayPlayers(px, po);
 
     const size = gameboard.getSize();
     let round = 0;
     let currentPlayer = px;
     let isGameOver = false;
     
-    displayController.displayTurn(currentPlayer);
+    UIController.displayTurn(currentPlayer);
 
     const handleMove = (i, j) => {
         if(isGameOver) return;
@@ -90,7 +90,7 @@ const createGame = (function (px, po, gameboard, displayController) {
         }
 
         playPosition(i, j, currentPlayer);
-        displayController.markCell(i, j, currentPlayer.mark);
+        UIController.markCell(i, j, currentPlayer.mark);
         
         let winner = getWinner();
         round++;
@@ -98,11 +98,11 @@ const createGame = (function (px, po, gameboard, displayController) {
         
         if(winner !== null || round === size * size) {
             isGameOver = true;
-            displayController.displayEndgame(winner);
+            UIController.displayEndgame(winner);
             return;
         }
 
-        displayController.displayTurn(currentPlayer);
+        UIController.displayTurn(currentPlayer);
     };
     
     const playPosition = (i, j, player) => {
@@ -152,4 +152,4 @@ const createGame = (function (px, po, gameboard, displayController) {
 
     return { handleMove };
 
-})(px, po, gameboard, displayController);
+})(px, po, gameboard, UIController);
