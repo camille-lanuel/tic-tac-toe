@@ -22,7 +22,7 @@ body {
     font-weight: bold;
 }
 
-button {
+.cell {
     background-color: lightgray;
     border: none;
     color: inherit;
@@ -38,9 +38,13 @@ button {
     background-color: lightpink;
 }
 
-/* button:hover:not(:disabled) {
-    background-color: darkgray;
-} */
+.cell:hover:not(:disabled)::before {
+    content: "x";
+}
+
+.o-active > .cell:hover:not(:disabled)::before {
+    content: "o";
+}
 
 button:disabled {
     cursor: not-allowed;
