@@ -23,8 +23,8 @@ body {
 }
 
 .cell {
-    background-color: lightgray;
-    border: none;
+    background-color: inherit;
+    border: 1px solid #333;
     color: inherit;
     cursor: pointer;
     font-size: 2rem;
