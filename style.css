@@ -1,5 +1,24 @@
+:root {
+    --txt: hsl(0, 0%, 20%);
+    --bkg: hsl(0, 0%, 95%);
+    --accent: hsl(0, 0%, 80%);
+    --color-o: hsl(200, 45%, 75%);
+    --color-x: hsl(350, 45%, 75%);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --txt: hsl(0, 0%, 80%);
+        --bkg: hsl(0, 0%, 5%);
+        --accent: hsl(0, 0%, 20%);
+        --color-o: hsl(200, 55%, 25%);
+        --color-x: hsl(350, 55%, 25%);
+    }
+}
+
 body {
-    color: #333;
+    background-color: var(--bkg);
+    color: var(--txt);
     font-family: monospace;
     font-size: 1.1rem;
     margin: auto;
@@ -7,7 +26,7 @@ body {
 }
 
 ::selection {
-    background-color: lightgray;
+    background-color: var(--accent);
 }
 
 #ttt-grid {
@@ -24,18 +43,18 @@ body {
 
 .cell {
     background-color: inherit;
-    border: 1px solid #333;
+    border: 1px solid var(--txt);
     color: inherit;
     cursor: pointer;
     font-size: 2rem;
 }
 
-.o, .o-active > button:hover:not(:disabled) {
-    background-color: lightblue;
+.x, button:hover:not(:disabled) {
+    background-color: var(--color-x);
 }
 
-.x, button:hover:not(:disabled) {
-    background-color: lightpink;
+.o, .o-active > button:hover:not(:disabled) {
+    background-color: var(--color-o);
 }
 
 .cell:hover:not(:disabled)::before {
