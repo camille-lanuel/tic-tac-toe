@@ -1,7 +1,7 @@
 :root {
     --txt: hsl(0, 0%, 20%);
     --bkg: hsl(0, 0%, 95%);
-    --accent: hsl(0, 0%, 80%);
+    --accent: hsl(0, 0%, 75%);
     --color-o: hsl(200, 45%, 75%);
     --color-x: hsl(350, 45%, 75%);
 }
@@ -10,8 +10,8 @@
     :root {
         --txt: hsl(0, 0%, 80%);
         --bkg: hsl(0, 0%, 5%);
-        --accent: hsl(0, 0%, 20%);
-        --color-o: hsl(200, 55%, 25%);
+        --accent: hsl(0, 0%, 25%);
+        --color-o: hsl(230, 55%, 25%);
         --color-x: hsl(350, 55%, 25%);
     }
 }
@@ -49,11 +49,11 @@ body {
     font-size: 2rem;
 }
 
-.x, button:hover:not(:disabled) {
+.x, .cell:hover:not(:disabled) {
     background-color: var(--color-x);
 }
 
-.o, .o-active > button:hover:not(:disabled) {
+.o, .o-active > .cell:hover:not(:disabled) {
     background-color: var(--color-o);
 }
 
