@@ -77,15 +77,15 @@ const UIController = (function () {
     return { markCell, displayPlayers, displayPlayer, displayEndgame };
 })();
 
-const createGame = (function (px, po, gameboard, UIController) {
-    UIController.displayPlayers(px, po);
+const createGame = (function (px, po, gameboard, controller) {
+    controller.displayPlayers(px, po);
 
     const size = gameboard.getSize();
     let round = 0;
     let currentPlayer = px;
     let isGameOver = false;
     
-    UIController.displayPlayer(currentPlayer);
+    controller.displayPlayer(currentPlayer);
 
     const handleMove = (i, j) => {
         if(isGameOver) return;
@@ -96,7 +96,7 @@ const createGame = (function (px, po, gameboard, UIController) {
         }
 
         playPosition(i, j, currentPlayer);
-        UIController.markCell(i, j, currentPlayer.getMark());
+        controller.markCell(i, j, currentPlayer.getMark());
         
         let winner = getWinner();
         round++;
@@ -104,11 +104,11 @@ const createGame = (function (px, po, gameboard, UIController) {
         
         if(winner !== null || round === size * size) {
             isGameOver = true;
-            UIController.displayEndgame(winner);
+            controller.displayEndgame(winner);
             return;
         }
 
-        UIController.displayPlayer(currentPlayer);
+        controller.displayPlayer(currentPlayer);
     };
     
     const playPosition = (i, j, player) => {
