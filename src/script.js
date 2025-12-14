@@ -23,14 +23,14 @@ const gameboard = (function (n) {
     return { getBoard, getCell, getSize, updateCell, isCellEmpty };
 })(3);
 
-const UIController = (function () {
-    const cells = document.querySelectorAll(".cell");
-    
-    cells.forEach(btn => {
+const UIController = (function (cells) {
+    const setEvents = () => {
+        cells.forEach(btn => {
         btn.addEventListener("click", function() {
             createGame.handleMove(Number(btn.dataset.i), Number(btn.dataset.j));
         });
     });
+    }
 
     const markCell = (i, j, mark) => {
         const cell = document.querySelector(`.cell[data-i="${i}"][data-j="${j}"]`);
@@ -74,10 +74,11 @@ const UIController = (function () {
         document.getElementById("display").classList.add("endgame");
     };
 
-    return { markCell, displayPlayers, displayPlayer, displayEndgame };
-})();
+    return { setEvents, markCell, displayPlayers, displayPlayer, displayEndgame };
+})(document.querySelectorAll(".cell"));
 
 const createGame = (function (px, po, gameboard, controller) {
+    controller.setEvents();
     controller.displayPlayers(px, po);
 
     const size = gameboard.getSize();
