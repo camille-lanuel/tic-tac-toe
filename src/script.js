@@ -28,11 +28,12 @@ const UIController = (function (cells) {
     const setMoveHandler = (handler) => { moveHandler = handler; };
 
     const setEvents = () => {
-        cells.forEach(btn => {
-        btn.addEventListener("click", function() {
-            moveHandler(Number(btn.dataset.i), Number(btn.dataset.j));
+        cells.forEach(cell => {
+            cell.addEventListener("click", function() {
+                cell.disabled = true;
+                moveHandler(Number(cell.dataset.i), Number(cell.dataset.j));
+            });
         });
-    });
     }
 
     const markCell = (i, j, mark) => {
@@ -81,13 +82,12 @@ const UIController = (function (cells) {
 })(document.querySelectorAll(".cell"));
 
 const createGame = (function (px, po, gameboard, controller) {
-    controller.displayPlayers(px, po);
-
     const size = gameboard.getSize();
     let round = 0;
     let currentPlayer = px;
     let isGameOver = false;
     
+    controller.displayPlayers(px, po);
     controller.displayPlayer(currentPlayer);
 
     const handleMove = (i, j) => {
