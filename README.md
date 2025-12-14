@@ -1,6 +1,6 @@
 A Tic Tac Toe game for the [Odin Project](https://www.theodinproject.com/lessons/node-path-javascript-tic-tac-toe).
 
-The goal was to use factory functions and the module pattern.
+The goal of the project was to use factory functions and the module pattern in JS.
 
 # TODO
 
