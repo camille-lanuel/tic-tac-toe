@@ -24,10 +24,13 @@ const gameboard = (function (n) {
 })(3);
 
 const UIController = (function (cells) {
+    let moveHandler = () => console.log("error: moveHandler not set");
+    const setMoveHandler = (handler) => { moveHandler = handler; };
+
     const setEvents = () => {
         cells.forEach(btn => {
         btn.addEventListener("click", function() {
-            createGame.handleMove(Number(btn.dataset.i), Number(btn.dataset.j));
+            moveHandler(Number(btn.dataset.i), Number(btn.dataset.j));
         });
     });
     }
@@ -74,11 +77,10 @@ const UIController = (function (cells) {
         document.getElementById("display").classList.add("endgame");
     };
 
-    return { setEvents, markCell, displayPlayers, displayPlayer, displayEndgame };
+    return { setMoveHandler, setEvents, markCell, displayPlayers, displayPlayer, displayEndgame };
 })(document.querySelectorAll(".cell"));
 
 const createGame = (function (px, po, gameboard, controller) {
-    controller.setEvents();
     controller.displayPlayers(px, po);
 
     const size = gameboard.getSize();
@@ -92,7 +94,7 @@ const createGame = (function (px, po, gameboard, controller) {
         if(isGameOver) return;
 
         if(!isValid(i, j)) {
-            console.log(`Error: invalid cell: (${i}, ${j})`);
+            console.log(`error: invalid cell: (${i}, ${j})`);
             return;
         }
 
@@ -111,6 +113,9 @@ const createGame = (function (px, po, gameboard, controller) {
 
         controller.displayPlayer(currentPlayer);
     };
+
+    controller.setMoveHandler(handleMove);
+    controller.setEvents();
     
     const playPosition = (i, j, player) => {
         gameboard.updateCell(i, j, player.getMark());
