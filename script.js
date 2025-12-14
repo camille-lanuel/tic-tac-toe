@@ -1,9 +1,14 @@
-const gridSize = 3;
 const px = createPlayer("you", 'x');
 const po = createPlayer("also you", 'o');
 
 function createPlayer(name, mark) {
-    return { name, mark };
+    const playerName = name;
+    const playerMark = mark;
+
+    const getName = () => playerName;
+    const getMark = () => playerMark;
+
+    return { getName, getMark };
 }
 
 const gameboard = (function (n) {
@@ -16,7 +21,7 @@ const gameboard = (function (n) {
     const isCellEmpty = (i, j) => (getCell(i, j) === '_');
 
     return { getBoard, getCell, getSize, updateCell, isCellEmpty };
-})(gridSize);
+})(3);
 
 const UIController = (function () {
     const cells = document.querySelectorAll(".cell");
@@ -40,8 +45,8 @@ const UIController = (function () {
     };
 
     const displayPlayers = (px, po) => {
-        document.getElementById("player-x").textContent = `${px.name} (${px.mark})`;
-        document.getElementById("player-o").textContent = `${po.name} (${po.mark})`;
+        document.getElementById("player-x").textContent = `${px.getName()} (${px.getMark()})`;
+        document.getElementById("player-o").textContent = `${po.getName()} (${po.getMark()})`;
     }
 
     const displayPlayer = (p) => {
@@ -49,9 +54,9 @@ const UIController = (function () {
         if(p === null) {
             elt.textContent = "";
         } else {
-            elt.textContent = `${p.name} (${p.mark})`;
+            elt.textContent = `${p.getName()} (${p.getMark()})`;
             elt.classList = [];
-            elt.classList.add(p.mark);
+            elt.classList.add(p.getMark());
         }
     }
 
@@ -91,7 +96,7 @@ const createGame = (function (px, po, gameboard, UIController) {
         }
 
         playPosition(i, j, currentPlayer);
-        UIController.markCell(i, j, currentPlayer.mark);
+        UIController.markCell(i, j, currentPlayer.getMark());
         
         let winner = getWinner();
         round++;
@@ -107,7 +112,7 @@ const createGame = (function (px, po, gameboard, UIController) {
     };
     
     const playPosition = (i, j, player) => {
-        gameboard.updateCell(i, j, player.mark);
+        gameboard.updateCell(i, j, player.getMark());
     };
 
     const isValid = (i, j) => {
@@ -124,7 +129,7 @@ const createGame = (function (px, po, gameboard, UIController) {
         if (firstCell === '_') return null;
 
         const allMatch = line.every(elt => elt === firstCell);
-        if (allMatch) return firstCell === px.mark ? px : po;
+        if (allMatch) return firstCell === px.getMark() ? px : po;
 
         return null;
     };
