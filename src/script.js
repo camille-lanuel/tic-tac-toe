@@ -74,7 +74,7 @@ const UIController = (function () {
         document.getElementById("display").classList.add("endgame");
     };
 
-    return { markCell, displayPlayers, displayTurn: displayPlayer, displayEndgame };
+    return { markCell, displayPlayers, displayPlayer, displayEndgame };
 })();
 
 const createGame = (function (px, po, gameboard, UIController) {
@@ -85,7 +85,7 @@ const createGame = (function (px, po, gameboard, UIController) {
     let currentPlayer = px;
     let isGameOver = false;
     
-    UIController.displayTurn(currentPlayer);
+    UIController.displayPlayer(currentPlayer);
 
     const handleMove = (i, j) => {
         if(isGameOver) return;
@@ -108,7 +108,7 @@ const createGame = (function (px, po, gameboard, UIController) {
             return;
         }
 
-        UIController.displayTurn(currentPlayer);
+        UIController.displayPlayer(currentPlayer);
     };
     
     const playPosition = (i, j, player) => {
